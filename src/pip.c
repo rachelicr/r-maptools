@@ -42,7 +42,7 @@ SEXP R_point_in_polygon_mt(SEXP px, SEXP py, SEXP polx, SEXP poly) {
 	SEXP ret;
 
 	pol.lines = LENGTH(polx); /* check later that first == last */
-	pol.p = (PLOT_POINT *) Calloc(pol.lines, PLOT_POINT); /* Calloc does error handling */
+	pol.p = (PLOT_POINT *) calloc(pol.lines, PLOT_POINT); /* Calloc does error handling */
 	for (i = 0; i < LENGTH(polx); i++) {
 		pol.p[i].x = NUMERIC_POINTER(polx)[i];
 		pol.p[i].y = NUMERIC_POINTER(poly)[i];
@@ -70,7 +70,7 @@ For each query point q, InPoly returns one of four char's:
 			default: INTEGER_POINTER(ret)[i] = -1; break;
 		}
 	}
-	Free(pol.p);
+	free(pol.p);
 	return(ret);
 }
 
